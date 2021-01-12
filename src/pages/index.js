@@ -1,5 +1,13 @@
 import React from "react"
+import Todo from '../components/Todo'
+
 
 export default function Home() {
-  return <div>Hello world!</div>
+  return (
+  <div>
+    <Todo />
+  </div>
+
+
+  )
 }
