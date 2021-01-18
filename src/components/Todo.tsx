@@ -41,7 +41,7 @@ function rand() {
 
 function getModalStyle() {
     const top = 40 + rand();
-    const left = 45 + rand();
+    const left = 50 + rand();
 
     return {
         top: `${top}%`,
@@ -89,7 +89,7 @@ function Todo() {
 
     // Delete Todos
     const deleteTodo = async (id) => {
-        console.log(id)
+        
         await fetch(`/.netlify/functions/delete_todo`, {
             method: 'DELETE',
             body: JSON.stringify(id)
@@ -98,13 +98,12 @@ function Todo() {
             .then((data) => {
                 return data
             })
-            .catch(err => console.log(err))
+            .catch(err => err)
     }
 
     // Update Todo
     const updateTodo = async (todo, id) => {
-        console.log('updateTodo', todo)
-        console.log("updateId", id)
+       
         await fetch(`.netlify/functions/update_todo`, {
             method: 'PUT',
             body: JSON.stringify({ id, todo })
@@ -118,7 +117,7 @@ function Todo() {
     useEffect(() => {
         const fetchData = async () => {
             const data = await readData()
-            console.log('fetchdata', data)
+           
             getTodos(data)
             setUseEffect(false)
         }
@@ -140,7 +139,7 @@ function Todo() {
                     })
                         .then(res => res.json())
                         .then(data => {
-                            console.log('data', data)
+                            return data
                         })
                     setUseEffect(true)
                 }}
@@ -179,7 +178,6 @@ function Todo() {
 
                     <List>
                         {todo.map((item, i) => {
-                            console.log('item', item)
                             return (
                                 <div key={i}>
 
@@ -201,7 +199,6 @@ function Todo() {
                                             <Button type='submit' onClick={() => {
                                                 handleOpen()
                                                 setUpdateId(item.ref['@ref'].id)
-                                                console.log(updateId)
                                             }}>
                                                 <UpdateIcon />
                                             </Button>
